@@ -3,10 +3,11 @@ const path = require('path');
 
 require('colors')
 const _ = require('lodash');
-const { checkbox } = require('inquirer');
 const mkdirp = require('mkdirp');
 const mongoose = require('mongoose');
 const Promise = require('bluebird');
+
+import { checkbox } from '@inquirer/checkbox';
 
 const MigrationModelFactory = require('./db');
 
