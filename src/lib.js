@@ -3,10 +3,11 @@ const path = require('path');
 
 require('colors')
 const _ = require('lodash');
-const ask = require('inquirer');
 const mkdirp = require('mkdirp');
 const mongoose = require('mongoose');
 const Promise = require('bluebird');
+
+import { checkbox } from '@inquirer/checkbox';
 
 const MigrationModelFactory = require('./db');
 
@@ -220,8 +221,7 @@ class Migrator {
       this.log('Synchronizing database with file system migrations...');
       if (!this.autosync && migrationsToImport.length) {
         const answers = await new Promise(function (resolve) {
-          ask.prompt({
-            type: 'checkbox',
+          checkbox({
             message: 'The following migrations exist in the migrations folder but not in the database. Select the ones you want to import into the database',
             name: 'migrationsToImport',
             choices: filesNotInDb
